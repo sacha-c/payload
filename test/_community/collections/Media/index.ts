@@ -8,7 +8,30 @@ export const MediaCollection: CollectionConfig = {
     create: () => true,
     read: () => true,
   },
-  fields: [],
+  fields: [
+    {
+      name: 'test',
+      type: 'checkbox',
+      validate: async (_, options): Promise<string | true> => {
+        if (!('file' in options.siblingData)) {
+          // Payload has not loaded the file yet, pass validation
+          return true
+        }
+
+        try {
+          const result = await (options.siblingData.file as File).arrayBuffer()
+          console.log('result', result)
+
+          // perform validation with the arrayBuffer, loading it in memory & checking details of the object
+          // ...
+        } catch (error) {
+          console.log('error', error)
+        }
+
+        return true
+      },
+    },
+  ],
   upload: {
     crop: true,
     focalPoint: true,
