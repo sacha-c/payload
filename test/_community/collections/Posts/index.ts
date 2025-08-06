@@ -9,10 +9,15 @@ export const PostsCollection: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
   },
+  versions: {
+    drafts: true,
+  },
   fields: [
     {
       name: 'title',
       type: 'text',
+      required: true,
+      localized: true,
     },
     {
       name: 'content',
