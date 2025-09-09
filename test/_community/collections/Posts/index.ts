@@ -22,5 +22,11 @@ export const PostsCollection: CollectionConfig = {
         features: ({ defaultFeatures }) => [...defaultFeatures],
       }),
     },
+    {
+      name: 'test',
+      type: 'upload',
+      relationTo: 'media',
+      localized: true,
+    },
   ],
 }
