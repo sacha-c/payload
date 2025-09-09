@@ -29,4 +29,22 @@ export const PostsCollection: CollectionConfig = {
       localized: true,
     },
   ],
+  hooks: {
+    beforeRead: [
+      ({ doc }) => {
+        console.log('beforeRead', doc)
+        // If field was saved non-localized (pre-localization), it will be an ObjectId instance which needs to be cast to string
+        if (doc.test._id) {
+          doc.test = `${doc.test._id}`
+        }
+        return doc
+      },
+    ],
+    afterRead: [
+      ({ doc }) => {
+        console.log('afterRead', doc)
+        return doc
+      },
+    ],
+  },
 }
